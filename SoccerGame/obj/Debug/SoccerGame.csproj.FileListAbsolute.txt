@@ -1,0 +1,15 @@
+C:\Users\826506\source\repos\SoccerGame\SoccerGame\bin\Debug\SoccerGame.exe.config
+C:\Users\826506\source\repos\SoccerGame\SoccerGame\bin\Debug\SoccerGame.exe
+C:\Users\826506\source\repos\SoccerGame\SoccerGame\bin\Debug\SoccerGame.pdb
+C:\Users\826506\source\repos\SoccerGame\SoccerGame\obj\Debug\SoccerGame.csprojResolveAssemblyReference.cache
+C:\Users\826506\source\repos\SoccerGame\SoccerGame\obj\Debug\MainWindow.g.cs
+C:\Users\826506\source\repos\SoccerGame\SoccerGame\obj\Debug\App.g.cs
+C:\Users\826506\source\repos\SoccerGame\SoccerGame\obj\Debug\SoccerGame_MarkupCompile.cache
+C:\Users\826506\source\repos\SoccerGame\SoccerGame\obj\Debug\SoccerGame_MarkupCompile.lref
+C:\Users\826506\source\repos\SoccerGame\SoccerGame\obj\Debug\MainWindow.baml
+C:\Users\826506\source\repos\SoccerGame\SoccerGame\obj\Debug\SoccerGame.g.resources
+C:\Users\826506\source\repos\SoccerGame\SoccerGame\obj\Debug\SoccerGame.Properties.Resources.resources
+C:\Users\826506\source\repos\SoccerGame\SoccerGame\obj\Debug\SoccerGame.csproj.GenerateResource.Cache
+C:\Users\826506\source\repos\SoccerGame\SoccerGame\obj\Debug\SoccerGame.csproj.CoreCompileInputs.cache
+C:\Users\826506\source\repos\SoccerGame\SoccerGame\obj\Debug\SoccerGame.exe
+C:\Users\826506\source\repos\SoccerGame\SoccerGame\obj\Debug\SoccerGame.pdb
