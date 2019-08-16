@@ -37,8 +37,14 @@ namespace SoccerGame
         int goalBoundRight = 344;
         int goalBoundBottom = 88;
 
+        double horizontalArrowAngle = 90;
+        double horizontalArrowVRad = 0; // Angular velocity in degrees
+
         double shotVerticalAngle = 0;
         bool angleRising = true; // Arrow is either rising or falling
+
+        int powerBar = 0;
+        int powerBarVelocity = 2;
 
         public MainWindow()
         {
@@ -53,7 +59,8 @@ namespace SoccerGame
         private void animate(object sender, EventArgs e)
         {
             animateKeeper();
-            animateDirectionArrow();
+            animateVerticalDirectionArrow();
+            animateHorizontalDirectionArrow();
         }
 
         private void animateKeeper()
@@ -82,9 +89,31 @@ namespace SoccerGame
             }
         }
 
-        private void animateDirectionArrow()
+        private void animateHorizontalDirectionArrow()
         {
-            Image arrow = DirectionArrow;
+            if(horizontalArrowAngle+horizontalArrowVRad>45 && horizontalArrowAngle + horizontalArrowVRad < 135)
+            {
+                horizontalArrowAngle += horizontalArrowVRad;
+                HorizontalDirectionArrow.RenderTransform = new RotateTransform(horizontalArrowAngle);
+            }
+        }
+
+        private void animatePowerBar()
+        {
+            if (powerBar + powerBarVelocity <= 200)
+            {
+                powerBar += powerBarVelocity;
+            }
+            else
+            {
+                powerBar = 0;
+            }
+            PowerBar.Width = powerBar;
+        }
+
+        private void animateVerticalDirectionArrow()
+        {
+            Image arrow = VerticalDirectionArrow;
             if (angleRising && shotVerticalAngle==90)
             {
                 angleRising = false;
@@ -102,7 +131,7 @@ namespace SoccerGame
                 shotVerticalAngle -= 90 / FPS;
             }
 
-            DirectionArrow.RenderTransform = new RotateTransform(shotVerticalAngle);
+            VerticalDirectionArrow.RenderTransform = new RotateTransform(shotVerticalAngle);
         }
 
 
@@ -116,12 +145,14 @@ namespace SoccerGame
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             Image keeper = Keeper;
-            
-           
+
+            Key pressedKey = e.Key;
+
+
             if (!keeperMoving)
             {
 
-                Key pressedKey = e.Key;
+                
 
 
                 if (pressedKey == Key.Up && Keyboard.IsKeyDown(Key.Right))
@@ -143,6 +174,7 @@ namespace SoccerGame
                     {
                         Canvas.SetLeft(keeper, Canvas.GetLeft(keeper) + moveInterval);
                     }
+                    
                 }
                 else if (pressedKey == Key.Left)
                 {
@@ -150,9 +182,32 @@ namespace SoccerGame
                     {
                         Canvas.SetLeft(keeper, Canvas.GetLeft(keeper) - moveInterval);
                     }
+                    
                 }                
             }
+
+            if(pressedKey == Key.Right)
+            {
+                horizontalArrowVRad = 2;
+            }
+            else if (pressedKey == Key.Left)
+            {
+                horizontalArrowVRad = -2;
+            }
+            else if (pressedKey == Key.Space)
+            {
+                powerBarVelocity = 10;
+            }
                       
+        }
+
+
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            horizontalArrowVRad = 0;
+            powerBarVelocity = 0;
+            powerBar = 0;
         }
     }
 }
