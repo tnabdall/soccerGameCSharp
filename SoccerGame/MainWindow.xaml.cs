@@ -23,32 +23,43 @@ namespace SoccerGame
     /// </summary>
     public partial class MainWindow : Window
     {
-        const int FPS = 60;
+        const int FPS = 60; // frames per second, how many times animate function runs within a second
 
-        bool keeperMoving = false;
+        bool keeperJumping = false; // lets us know if goalie is jumping for key press logic
         int keeperVx = 0;
         int keeperVy = 0;
+        // Animate function sets vertical velocity with this array and index.
+        // Allows for gravity-like jump
         int[] verticalJumpVelocity = new int[] { -12,-9, -6, -3, 0, 3, 6, 9, 12};
         int verticalVelocityIndex = 0;
+
+        // Game Timer
         DispatcherTimer uiTimer;
 
-        int moveInterval = 7;
-        int goalBoundLeft = 124;
-        int goalBoundRight = 344;
-        int goalBoundBottom = 88;
+        
+        int keeperMoveSpeed = 7; // Canvas units. Movement per frame.
 
-        double horizontalArrowAngle = 90;
+        const int GOAL_BOUND_LEFT = 124; // Left goal post
+        const int GOAL_BOUND_RIGHT = 344; // Right goal post
+
+
+        double horizontalArrowAngle = 90; // Arrow pointing up
         double horizontalArrowVRad = 0; // Angular velocity in degrees
 
-        double shotVerticalAngle = 0;
-        bool angleRising = true; // Arrow is either rising or falling
+        const double HORIZONTAL_ANGLE_BOUND_LEFT = 45; // Left bound of degree rotation for horiz. arrow
+        const double HORIZONTAL_ANGLE_BOUND_RIGHT = 135; // Right bound of degree rotation for horiz. arrow
 
-        int powerBar = 0;
-        int powerBarVelocity = 2;
+        double shotVerticalAngle = 0; // Vertical direction angle. Controls position on screen.
+        bool angleRising = true; // Controls whether arrow is rising or falling
+
+        int powerBar = 0; // Power of shot.
+        int powerBarVelocity = 0; // How fast power bar increases per frame.
 
         public MainWindow()
         {
             InitializeComponent();
+
+            // Start game timer and runs animate function on defined FPS
             uiTimer = new DispatcherTimer(); //This timer is created on GUI thread.
             uiTimer.Tick += new EventHandler(animate);
             uiTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / FPS); // 60 ticks per second
@@ -56,51 +67,66 @@ namespace SoccerGame
 
         }
 
+        // Function to animate window
         private void animate(object sender, EventArgs e)
         {
             animateKeeper();
-            animateVerticalDirectionArrow();
-            animateHorizontalDirectionArrow();
+            animatePowerBar();
+            // Stop animation for arrows if user has pressed space
+            if (powerBarVelocity == 0)
+            {
+                animateVerticalDirectionArrow();
+                animateHorizontalDirectionArrow();
+            }
         }
 
         private void animateKeeper()
         {
             Image keeper = Keeper;
-            if (keeperMoving)
+            // Test to see if new horizontal position is within goal bounds
+            double newHorizontalPosition = Canvas.GetLeft(keeper) + keeperVx;
+            if (newHorizontalPosition > GOAL_BOUND_LEFT && newHorizontalPosition < GOAL_BOUND_RIGHT)
+            {
+                Canvas.SetLeft(keeper, newHorizontalPosition);
+            }
+
+            // Handles vertical jump path
+            if (keeperJumping)
             {
                 Canvas.SetTop(keeper, Canvas.GetTop(keeper) + keeperVy);
-                double newLeftPosition = Canvas.GetLeft(keeper) + keeperVx;
-                if (newLeftPosition > goalBoundLeft && newLeftPosition < goalBoundRight)
-                {
-                    Canvas.SetLeft(keeper, newLeftPosition);
-                }
+                
+                // Gravity-like jump. Moves to next velocity in array.
                 verticalVelocityIndex++;
                 if (verticalVelocityIndex >= verticalJumpVelocity.Count())
                 {
+                    // Ends jump
                     verticalVelocityIndex = 0;
-                    keeperMoving = false;
+                    keeperJumping = false;
                     keeperVx = 0;
                     keeperVy = 0;
                 }
                 else
                 {
+                    // Go to next value in jump array
                     keeperVy = verticalJumpVelocity[verticalVelocityIndex];
                 }
             }
         }
 
+        // Rotates horizontal shot arrow as long as its within bounds.
         private void animateHorizontalDirectionArrow()
         {
-            if(horizontalArrowAngle+horizontalArrowVRad>45 && horizontalArrowAngle + horizontalArrowVRad < 135)
+            if(horizontalArrowAngle+horizontalArrowVRad>HORIZONTAL_ANGLE_BOUND_LEFT && horizontalArrowAngle + horizontalArrowVRad < HORIZONTAL_ANGLE_BOUND_RIGHT)
             {
                 horizontalArrowAngle += horizontalArrowVRad;
                 HorizontalDirectionArrow.RenderTransform = new RotateTransform(horizontalArrowAngle);
             }
         }
 
+        // Increases power bar. Restarts at 0 if it gets to full width.
         private void animatePowerBar()
         {
-            if (powerBar + powerBarVelocity <= 200)
+            if (powerBar + powerBarVelocity <= PowerBarLimit.Width)
             {
                 powerBar += powerBarVelocity;
             }
@@ -111,6 +137,7 @@ namespace SoccerGame
             PowerBar.Width = powerBar;
         }
 
+        // Moves vertical direction arrow up and down.
         private void animateVerticalDirectionArrow()
         {
             Image arrow = VerticalDirectionArrow;
@@ -134,10 +161,10 @@ namespace SoccerGame
             VerticalDirectionArrow.RenderTransform = new RotateTransform(shotVerticalAngle);
         }
 
-
-        private void jump(Image keeper, int goalBoundLeft, int goalBoundBottom, int vx)
+        // Sets velocities for keeper jump path.
+        private void jump(int vx)
         {
-            keeperMoving = true;
+            keeperJumping = true; // Flag for animate function to run jump logic
             keeperVy = verticalJumpVelocity[0];
             keeperVx = vx;
         }
@@ -148,44 +175,34 @@ namespace SoccerGame
 
             Key pressedKey = e.Key;
 
-
-            if (!keeperMoving)
-            {
-
-                
-
-
+            // Process goalie movement if keeper isnt jumping
+            if (!keeperJumping)
+            {            
                 if (pressedKey == Key.Up && Keyboard.IsKeyDown(Key.Right))
                 {
-                    jump(keeper, goalBoundLeft, goalBoundBottom, 1 * moveInterval);
+                    jump(1 * keeperMoveSpeed);
                 }
                 else if (pressedKey == Key.Up && Keyboard.IsKeyDown(Key.Left))
                 {
-                    jump(keeper, goalBoundLeft, goalBoundBottom, -1*moveInterval);
+                    jump(-1* keeperMoveSpeed);
 
                 }
                 else if (pressedKey == Key.Up)
                 {
-                    jump(keeper, goalBoundLeft, goalBoundBottom, 0);
+                    jump(0);
                 }
                 else if (pressedKey == Key.Right)
                 {
-                    if (Canvas.GetLeft(keeper) + moveInterval < goalBoundRight)
-                    {
-                        Canvas.SetLeft(keeper, Canvas.GetLeft(keeper) + moveInterval);
-                    }
+                    keeperVx = keeperMoveSpeed;
                     
                 }
                 else if (pressedKey == Key.Left)
                 {
-                    if (Canvas.GetLeft(keeper) - moveInterval > goalBoundLeft)
-                    {
-                        Canvas.SetLeft(keeper, Canvas.GetLeft(keeper) - moveInterval);
-                    }
-                    
+                    keeperVx = -keeperMoveSpeed;                    
                 }                
             }
 
+            // Controls for shooter
             if(pressedKey == Key.Right)
             {
                 horizontalArrowVRad = 2;
@@ -201,13 +218,16 @@ namespace SoccerGame
                       
         }
 
-
-
+        // Resets appropriate velocities when keys are released
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {
             horizontalArrowVRad = 0;
             powerBarVelocity = 0;
             powerBar = 0;
+            if (!keeperJumping)
+            {
+                keeperVx = 0;
+            }
         }
     }
 }
