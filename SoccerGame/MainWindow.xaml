@@ -9,10 +9,20 @@
     <Canvas>
         <Rectangle Fill="#FF7E7EF5" Height="221" Stroke="Black" Width="517"/>
         <Rectangle Fill="#FF7AFF0B" Height="98" Stroke="Black" Canvas.Top="221" Width="517"/>
-        <Image Height="226" Canvas.Top="93" Width="517"/>
-        <Image Height="319" Width="517" Source="C:\Users\826506\Desktop\SoccerGame\SoccerGame\resources\football_goal.png" Stretch="Fill"/>
-        <Image x:Name="SoccerBall" Height="62" Canvas.Left="227" Canvas.Top="221" Width="62" Source="C:\Users\826506\Desktop\SoccerGame\SoccerGame\resources\soccer_ball.png"/>
-        <Image x:Name="Keeper" Height="80" Canvas.Left="237" Canvas.Top="88" Width="52" Source="C:\Users\826506\Desktop\SoccerGame\SoccerGame\resources\stickman_standing.png" RenderTransformOrigin="0.497,0.304"/>
+        <Image x:Name="Background" Height="319" Width="517" Source="pack://application:,,,/SoccerGame;component/resources/football_goal.png" Stretch="Fill"/>
+        <Image x:Name="SoccerBall" Height="62" Canvas.Left="227" Canvas.Top="221" Width="62" Source="pack://application:,,,/SoccerGame;component/resources/soccer_ball.png"/>
+        <Image x:Name="Keeper" Height="80" Canvas.Left="237" Canvas.Top="88" Width="52" Source="pack://application:,,,/SoccerGame;component/resources/stickman_standing_2.png" RenderTransformOrigin="0.497,0.304"/>
+        <Image x:Name="DirectionScaleImage" Height="100" Canvas.Left="417" Canvas.Top="219" Width="100" Source="pack://application:,,,/SoccerGame;component/resources/directionScaler.png"/>
+        <Image x:Name ="DirectionArrow" Height="179" Canvas.Left="428" Canvas.Top="229" Width="179" Source="pack://application:,,,/SoccerGame;component/resources/arrow.png" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
 
     </Canvas>
 </Window>

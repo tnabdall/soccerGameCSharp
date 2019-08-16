@@ -101,16 +101,33 @@
     <None Include="resources\football_goal.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="resources\football_goal.png" />
+    <Resource Include="resources\football_goal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="resources\soccer_ball.png" />
+    <Resource Include="resources\soccer_ball.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\stickman_standing.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\stickman_standing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\stickman_standing_2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\directionScaler.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\arrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -23,6 +23,8 @@ namespace SoccerGame
     /// </summary>
     public partial class MainWindow : Window
     {
+        const int FPS = 60;
+
         bool keeperMoving = false;
         int keeperVx = 0;
         int keeperVy = 0;
@@ -31,21 +33,30 @@ namespace SoccerGame
         DispatcherTimer uiTimer;
 
         int moveInterval = 7;
-        int goalBoundLeft = 126;
+        int goalBoundLeft = 124;
         int goalBoundRight = 344;
         int goalBoundBottom = 88;
+
+        double shotVerticalAngle = 0;
+        bool angleRising = true; // Arrow is either rising or falling
 
         public MainWindow()
         {
             InitializeComponent();
             uiTimer = new DispatcherTimer(); //This timer is created on GUI thread.
             uiTimer.Tick += new EventHandler(animate);
-            uiTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 25); // 25 ticks per second
+            uiTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / FPS); // 60 ticks per second
             uiTimer.Start();
 
         }
 
         private void animate(object sender, EventArgs e)
+        {
+            animateKeeper();
+            animateDirectionArrow();
+        }
+
+        private void animateKeeper()
         {
             Image keeper = Keeper;
             if (keeperMoving)
@@ -69,6 +80,29 @@ namespace SoccerGame
                     keeperVy = verticalJumpVelocity[verticalVelocityIndex];
                 }
             }
+        }
+
+        private void animateDirectionArrow()
+        {
+            Image arrow = DirectionArrow;
+            if (angleRising && shotVerticalAngle==90)
+            {
+                angleRising = false;
+            }
+            else if (angleRising)
+            {
+                shotVerticalAngle += 90 / FPS;
+            }
+            else if (shotVerticalAngle == 0)
+            {
+                angleRising = true;
+            }
+            else
+            {
+                shotVerticalAngle -= 90 / FPS;
+            }
+
+            DirectionArrow.RenderTransform = new RotateTransform(shotVerticalAngle);
         }
 
 
