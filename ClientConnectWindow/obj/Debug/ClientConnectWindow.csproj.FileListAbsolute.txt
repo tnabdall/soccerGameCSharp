@@ -27,3 +27,17 @@ C:\Users\tabda\Source\Repos\tnabdall\soccerGameCSharp\ClientConnectWindow\obj\De
 C:\Users\tabda\Source\Repos\tnabdall\soccerGameCSharp\ClientConnectWindow\obj\Debug\ClientConnectWindow.csproj.CopyComplete
 C:\Users\tabda\Source\Repos\tnabdall\soccerGameCSharp\ClientConnectWindow\obj\Debug\ClientConnectWindow.exe
 C:\Users\tabda\Source\Repos\tnabdall\soccerGameCSharp\ClientConnectWindow\obj\Debug\ClientConnectWindow.pdb
+C:\Users\ntamb\Source\Repos\tnabdall\soccerGameCSharp\ClientConnectWindow\bin\Debug\ClientConnectWindow.exe.config
+C:\Users\ntamb\Source\Repos\tnabdall\soccerGameCSharp\ClientConnectWindow\bin\Debug\ClientConnectWindow.exe
+C:\Users\ntamb\Source\Repos\tnabdall\soccerGameCSharp\ClientConnectWindow\bin\Debug\ClientConnectWindow.pdb
+C:\Users\ntamb\Source\Repos\tnabdall\soccerGameCSharp\ClientConnectWindow\bin\Debug\SoccerGame.exe
+C:\Users\ntamb\Source\Repos\tnabdall\soccerGameCSharp\ClientConnectWindow\bin\Debug\SoccerGame.pdb
+C:\Users\ntamb\Source\Repos\tnabdall\soccerGameCSharp\ClientConnectWindow\bin\Debug\SoccerGame.exe.config
+C:\Users\ntamb\Source\Repos\tnabdall\soccerGameCSharp\ClientConnectWindow\obj\Debug\ClientConnectWindow.csprojAssemblyReference.cache
+C:\Users\ntamb\Source\Repos\tnabdall\soccerGameCSharp\ClientConnectWindow\obj\Debug\ClientConnectWindow.ClientConnectionApp.resources
+C:\Users\ntamb\Source\Repos\tnabdall\soccerGameCSharp\ClientConnectWindow\obj\Debug\ClientConnectWindow.Properties.Resources.resources
+C:\Users\ntamb\Source\Repos\tnabdall\soccerGameCSharp\ClientConnectWindow\obj\Debug\ClientConnectWindow.csproj.GenerateResource.cache
+C:\Users\ntamb\Source\Repos\tnabdall\soccerGameCSharp\ClientConnectWindow\obj\Debug\ClientConnectWindow.csproj.CoreCompileInputs.cache
+C:\Users\ntamb\Source\Repos\tnabdall\soccerGameCSharp\ClientConnectWindow\obj\Debug\ClientConnectWindow.csproj.CopyComplete
+C:\Users\ntamb\Source\Repos\tnabdall\soccerGameCSharp\ClientConnectWindow\obj\Debug\ClientConnectWindow.exe
+C:\Users\ntamb\Source\Repos\tnabdall\soccerGameCSharp\ClientConnectWindow\obj\Debug\ClientConnectWindow.pdb

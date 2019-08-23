@@ -25,6 +25,9 @@ namespace SoccerGame
     {
         const int FPS = 60; // frames per second, how many times animate function runs within a second
 
+        bool isKeeper;
+        bool isPlayer;
+
         bool keeperJumping = false; // lets us know if goalie is jumping for key press logic
         int keeperVx = 0;
         int keeperVy = 0;
@@ -42,12 +45,17 @@ namespace SoccerGame
         const int GOAL_BOUND_LEFT = 124; // Left goal post
         const int GOAL_BOUND_RIGHT = 344; // Right goal post
 
+        const int GOAL_BOUND_TOP = 55; // Top goal post
+        const int GOAL_BOUND_BOTTOM = 154; // Bottom goal post
+
 
         double horizontalArrowAngle = 90; // Arrow pointing up
         double horizontalArrowVRad = 0; // Angular velocity in degrees
 
         const double HORIZONTAL_ANGLE_BOUND_LEFT = 45; // Left bound of degree rotation for horiz. arrow
         const double HORIZONTAL_ANGLE_BOUND_RIGHT = 135; // Right bound of degree rotation for horiz. arrow
+
+        
 
         double shotVerticalAngle = 0; // Vertical direction angle. Controls position on screen.
         bool angleRising = true; // Controls whether arrow is rising or falling
@@ -120,6 +128,7 @@ namespace SoccerGame
             {
                 horizontalArrowAngle += horizontalArrowVRad;
                 HorizontalDirectionArrow.RenderTransform = new RotateTransform(horizontalArrowAngle);
+                PowerLabel.Content = shotVerticalAngle.ToString();
             }
         }
 
@@ -228,6 +237,22 @@ namespace SoccerGame
             {
                 keeperVx = 0;
             }
+            if (e.Key == Key.Space)
+            {
+                shoot();
+            }
         }
+
+        private void shoot()
+        {
+            Image soccerBall = SoccerBall;
+            double soccerBallLeftPosition = 3.887 * horizontalArrowAngle - 101.452;
+            double soccerBallTopPosition = -1.666 * shotVerticalAngle + 130;
+            Canvas.SetLeft(soccerBall, soccerBallLeftPosition);
+            Canvas.SetTop(soccerBall, soccerBallTopPosition);
+            soccerBall.Width = 31;
+
+        }
+
     }
 }
