@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoccerGame", "SoccerGame\SoccerGame.csproj", "{76347C57-3F96-405C-99AA-5F5F76368072}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientConnectWindow", "ClientConnectWindow\ClientConnectWindow.csproj", "{3534A0F0-02A8-40AC-ACCE-4DEF16F9CA04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerConsole", "ServerConsole\ServerConsole.csproj", "{11C56D6B-9617-4E52-AC07-ECCA59A81E78}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{76347C57-3F96-405C-99AA-5F5F76368072}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76347C57-3F96-405C-99AA-5F5F76368072}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76347C57-3F96-405C-99AA-5F5F76368072}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3534A0F0-02A8-40AC-ACCE-4DEF16F9CA04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3534A0F0-02A8-40AC-ACCE-4DEF16F9CA04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3534A0F0-02A8-40AC-ACCE-4DEF16F9CA04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3534A0F0-02A8-40AC-ACCE-4DEF16F9CA04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11C56D6B-9617-4E52-AC07-ECCA59A81E78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11C56D6B-9617-4E52-AC07-ECCA59A81E78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11C56D6B-9617-4E52-AC07-ECCA59A81E78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11C56D6B-9617-4E52-AC07-ECCA59A81E78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

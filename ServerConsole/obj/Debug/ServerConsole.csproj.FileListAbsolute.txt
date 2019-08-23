@@ -1,0 +1,9 @@
+C:\Users\826506\Desktop\soccerGame\ServerConsole\bin\Debug\ServerConsole.exe.config
+C:\Users\826506\Desktop\soccerGame\ServerConsole\bin\Debug\ServerConsole.exe
+C:\Users\826506\Desktop\soccerGame\ServerConsole\bin\Debug\ServerConsole.pdb
+C:\Users\826506\Desktop\soccerGame\ServerConsole\bin\Debug\NetworkCommsDotNetComplete.dll
+C:\Users\826506\Desktop\soccerGame\ServerConsole\obj\Debug\ServerConsole.csprojAssemblyReference.cache
+C:\Users\826506\Desktop\soccerGame\ServerConsole\obj\Debug\ServerConsole.csproj.CoreCompileInputs.cache
+C:\Users\826506\Desktop\soccerGame\ServerConsole\obj\Debug\ServerConsole.csproj.CopyComplete
+C:\Users\826506\Desktop\soccerGame\ServerConsole\obj\Debug\ServerConsole.exe
+C:\Users\826506\Desktop\soccerGame\ServerConsole\obj\Debug\ServerConsole.pdb

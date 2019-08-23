@@ -1,0 +1,15 @@
+C:\Users\826506\Desktop\soccerGame\ClientConnectWindow\bin\Debug\ClientConnectWindow.exe.config
+C:\Users\826506\Desktop\soccerGame\ClientConnectWindow\bin\Debug\ClientConnectWindow.exe
+C:\Users\826506\Desktop\soccerGame\ClientConnectWindow\bin\Debug\ClientConnectWindow.pdb
+C:\Users\826506\Desktop\soccerGame\ClientConnectWindow\bin\Debug\NetworkCommsDotNetComplete.dll
+C:\Users\826506\Desktop\soccerGame\ClientConnectWindow\bin\Debug\SoccerGame.exe
+C:\Users\826506\Desktop\soccerGame\ClientConnectWindow\bin\Debug\SoccerGame.pdb
+C:\Users\826506\Desktop\soccerGame\ClientConnectWindow\bin\Debug\SoccerGame.exe.config
+C:\Users\826506\Desktop\soccerGame\ClientConnectWindow\obj\Debug\ClientConnectWindow.csprojAssemblyReference.cache
+C:\Users\826506\Desktop\soccerGame\ClientConnectWindow\obj\Debug\ClientConnectWindow.ClientConnectionApp.resources
+C:\Users\826506\Desktop\soccerGame\ClientConnectWindow\obj\Debug\ClientConnectWindow.Properties.Resources.resources
+C:\Users\826506\Desktop\soccerGame\ClientConnectWindow\obj\Debug\ClientConnectWindow.csproj.GenerateResource.cache
+C:\Users\826506\Desktop\soccerGame\ClientConnectWindow\obj\Debug\ClientConnectWindow.csproj.CoreCompileInputs.cache
+C:\Users\826506\Desktop\soccerGame\ClientConnectWindow\obj\Debug\ClientConnectWindow.csproj.CopyComplete
+C:\Users\826506\Desktop\soccerGame\ClientConnectWindow\obj\Debug\ClientConnectWindow.exe
+C:\Users\826506\Desktop\soccerGame\ClientConnectWindow\obj\Debug\ClientConnectWindow.pdb
