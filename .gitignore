@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/soccerGameCSharp/v16
+/.vs/SoccerGame/v16/Server/sqlite3
+/.vs/SoccerGame/v16/.suo
+/.vs/ProjectSettings.json
+/.vs/slnx.sqlite
+/.vs/VSWorkspaceState.json
+/ClientConnectWindow/obj/Release
+/ServerConsole/obj/Release
+/SoccerGame/obj/Release
