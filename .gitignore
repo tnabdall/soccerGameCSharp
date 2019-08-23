@@ -11,3 +11,7 @@
 /ClientConnectWindow/obj/Release
 /ServerConsole/obj/Release
 /SoccerGame/obj/Release
+/SoccerGame/bin/Debug
+/SoccerGame/obj/Debug
+/SoccerGame/bin/Debug/SoccerGame.exe
+/SoccerGame/bin/Debug/SoccerGame.pdb
