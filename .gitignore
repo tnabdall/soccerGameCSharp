@@ -1,4 +1,6 @@
-.vs\SoccerGame\v15\Server\sqlite3
-.vs\SoccerGame\v15\.suo
-SoccerGame\bin\Debug
-SoccerGame\obj\Debug
+*.exe
+*.pdb
+*.ide-shm
+*.ide-wal
+*.suo
+*.lock
