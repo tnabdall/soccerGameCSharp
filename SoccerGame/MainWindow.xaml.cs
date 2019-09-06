@@ -63,7 +63,7 @@ namespace SoccerGame
             uiTimer = new DispatcherTimer(); //This timer is created on GUI thread.
             uiTimer.Tick += new EventHandler(animate);
             uiTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / FPS); // 60 ticks per second
-            uiTimer.Start();
+            uiTimer.Start(); 
 
         }
 
