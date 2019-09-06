@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using System.Timers;
 using System.Threading;
 using System.Windows.Threading;
+using System.Windows.Media.Animation;
+
 
 namespace SoccerGame
 {
@@ -33,13 +35,16 @@ namespace SoccerGame
         int keeperVy = 0;
         // Animate function sets vertical velocity with this array and index.
         // Allows for gravity-like jump
-        int[] verticalJumpVelocity = new int[] { -12,-9, -6, -3, 0, 3, 6, 9, 12};
+        int[] verticalJumpVelocity = new int[] { -12, -9, -6, -3, 0, 3, 6, 9, 12 };
         int verticalVelocityIndex = 0;
+
+        double initialSoccerBallWidth = 62;
+        double soccerBallFinalWidth = 31;//soccerBall.Width = 31;
 
         // Game Timer
         DispatcherTimer uiTimer;
 
-        
+
         int keeperMoveSpeed = 7; // Canvas units. Movement per frame.
 
         const int GOAL_BOUND_LEFT = 124; // Left goal post
@@ -55,7 +60,7 @@ namespace SoccerGame
         const double HORIZONTAL_ANGLE_BOUND_LEFT = 45; // Left bound of degree rotation for horiz. arrow
         const double HORIZONTAL_ANGLE_BOUND_RIGHT = 135; // Right bound of degree rotation for horiz. arrow
 
-        
+
 
         double shotVerticalAngle = 0; // Vertical direction angle. Controls position on screen.
         bool angleRising = true; // Controls whether arrow is rising or falling
@@ -102,7 +107,7 @@ namespace SoccerGame
             if (keeperJumping)
             {
                 Canvas.SetTop(keeper, Canvas.GetTop(keeper) + keeperVy);
-                
+
                 // Gravity-like jump. Moves to next velocity in array.
                 verticalVelocityIndex++;
                 if (verticalVelocityIndex >= verticalJumpVelocity.Count())
@@ -124,7 +129,7 @@ namespace SoccerGame
         // Rotates horizontal shot arrow as long as its within bounds.
         private void animateHorizontalDirectionArrow()
         {
-            if(horizontalArrowAngle+horizontalArrowVRad>HORIZONTAL_ANGLE_BOUND_LEFT && horizontalArrowAngle + horizontalArrowVRad < HORIZONTAL_ANGLE_BOUND_RIGHT)
+            if (horizontalArrowAngle + horizontalArrowVRad > HORIZONTAL_ANGLE_BOUND_LEFT && horizontalArrowAngle + horizontalArrowVRad < HORIZONTAL_ANGLE_BOUND_RIGHT)
             {
                 horizontalArrowAngle += horizontalArrowVRad;
                 HorizontalDirectionArrow.RenderTransform = new RotateTransform(horizontalArrowAngle);
@@ -150,7 +155,7 @@ namespace SoccerGame
         private void animateVerticalDirectionArrow()
         {
             Image arrow = VerticalDirectionArrow;
-            if (angleRising && shotVerticalAngle==90)
+            if (angleRising && shotVerticalAngle == 90)
             {
                 angleRising = false;
             }
@@ -186,14 +191,14 @@ namespace SoccerGame
 
             // Process goalie movement if keeper isnt jumping
             if (!keeperJumping)
-            {            
+            {
                 if (pressedKey == Key.Up && Keyboard.IsKeyDown(Key.Right))
                 {
                     jump(1 * keeperMoveSpeed);
                 }
                 else if (pressedKey == Key.Up && Keyboard.IsKeyDown(Key.Left))
                 {
-                    jump(-1* keeperMoveSpeed);
+                    jump(-1 * keeperMoveSpeed);
 
                 }
                 else if (pressedKey == Key.Up)
@@ -203,16 +208,16 @@ namespace SoccerGame
                 else if (pressedKey == Key.Right)
                 {
                     keeperVx = keeperMoveSpeed;
-                    
+
                 }
                 else if (pressedKey == Key.Left)
                 {
-                    keeperVx = -keeperMoveSpeed;                    
-                }                
+                    keeperVx = -keeperMoveSpeed;
+                }
             }
 
             // Controls for shooter
-            if(pressedKey == Key.Right)
+            if (pressedKey == Key.Right)
             {
                 horizontalArrowVRad = 2;
             }
@@ -224,7 +229,7 @@ namespace SoccerGame
             {
                 powerBarVelocity = 10;
             }
-                      
+
         }
 
         // Resets appropriate velocities when keys are released
@@ -246,13 +251,109 @@ namespace SoccerGame
         private void shoot()
         {
             Image soccerBall = SoccerBall;
-            double soccerBallLeftPosition = 3.887 * horizontalArrowAngle - 101.452;
-            double soccerBallTopPosition = -1.666 * shotVerticalAngle + 130;
-            Canvas.SetLeft(soccerBall, soccerBallLeftPosition);
-            Canvas.SetTop(soccerBall, soccerBallTopPosition);
-            soccerBall.Width = 31;
+            double soccerBallInitialLeftPosition = Canvas.GetLeft(soccerBall);
+            double soccerBallInitialTopPosition = Canvas.GetTop(soccerBall);
+            double soccerBallInitialWidth = soccerBall.Width;
+            double soccerBallFinalLeftPosition = 3.887 * horizontalArrowAngle - 101.452;
+            double soccerBallFinalTopPosition = -1.666 * shotVerticalAngle + 130;
+            
 
+            // Canvas.SetLeft(soccerBall, soccerBallFinalLeftPosition);
+            //Canvas.SetTop(soccerBall, soccerBallFinalTopPosition);
+
+
+            //double mousePositionX = e.GetPosition(canvas).X;
+            //double mousePositionY = e.GetPosition(canvas).Y;
+
+            
+            //Defines the X-axis animation
+            DoubleAnimation animationX = new DoubleAnimation();
+            animationX.To = soccerBallFinalLeftPosition;
+            //animationX.To = mousePositionX;
+            Storyboard.SetTarget(animationX, soccerBall);
+            Storyboard.SetTargetProperty(animationX, new PropertyPath("(Canvas.Left)"));
+
+            //Defines the Y-axis animation
+            DoubleAnimation animationY = new DoubleAnimation();
+            animationY.To = soccerBallFinalTopPosition;
+            //animationY.To = mousePositionY;
+            Storyboard.SetTarget(animationY, soccerBall);
+            Storyboard.SetTargetProperty(animationY, new PropertyPath("(Canvas.Top)"));
+
+            DoubleAnimation ballSizeAnimation = new DoubleAnimation();
+            ballSizeAnimation.From = 1;
+            ballSizeAnimation.To = 0.5;
+            
+           
+
+            ballScale.BeginAnimation(ScaleTransform.ScaleXProperty, ballSizeAnimation);
+            ballScale.BeginAnimation(ScaleTransform.ScaleYProperty, ballSizeAnimation);
+
+
+            Storyboard storyboard = new Storyboard();
+
+            storyboard.Children.Add(animationX);
+            storyboard.Children.Add(animationY);
+            storyboard.Begin();
+
+            
+            
+            
+
+            //animateSoccerBall (soccerBall, soccerBallInitialLeftPosition, soccerBallInitialTopPosition, soccerBallInitialWidth);
+
+            /*
+            MessageBoxResult result = MessageBox.Show("Thanks For Playing","Notice",MessageBoxButton.OK);
+            if (result == MessageBoxResult.OK)
+            {
+                soccerBall.Width = soccerBallInitialWidth;
+                Canvas.SetLeft(soccerBall, soccerBallInitialLeftPosition);
+                Canvas.SetTop(soccerBall, soccerBallInitialTopPosition);
+            }
+            */
+
+            /*
+            var seq = Enumerable.Range(0, 10);
+            foreach (int num in seq)
+            {
+                Canvas.SetLeft(soccerBall, soccerBallInitialLeftPosition - 15);
+                Canvas.SetTop(soccerBall, soccerBallInitialTopPosition - 15);
+                soccerBall.Width = soccerBallInitialWidth - 3;
+                //MessageBox.Show(num.ToString());
+            }
+            */
+        }
+
+        // Moves soccerball toward net and shrinks its size.
+        private void animateSoccerBall(Image soccerBall, double soccerBallInitialLeftPosition, double soccerBallInitialTopPosition, double soccerBallInitialWidth)
+        {
+            double soccerBallFinalLeftPosition = 3.887 * horizontalArrowAngle - 101.452;
+            double soccerBallFinalTopPosition = -1.666 * shotVerticalAngle + 130;
+
+            //Canvas.SetLeft(soccerBall, soccerBallFinalLeftPosition);
+            //Canvas.SetTop(soccerBall, soccerBallFinalTopPosition);
+            if (powerBar + powerBarVelocity <= PowerBarLimit.Width)
+            {
+                powerBar += powerBarVelocity;
+            }
+            else
+            {
+                powerBar = 0;
+            }
+            PowerBar.Width = powerBar;
+
+            /*
+            var seq = Enumerable.Range(0, 10);
+            foreach (int num in seq)
+            {
+                //Canvas.SetLeft(soccerBall, soccerBallInitialLeftPosition - 15);
+                Canvas.SetTop(soccerBall, soccerBallInitialTopPosition - 15);
+                soccerBall.Width = soccerBallInitialWidth - 3;
+                //MessageBox.Show(num.ToString());
+            }
+            */
         }
 
     }
+    
 }
