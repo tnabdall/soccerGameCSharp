@@ -29,6 +29,7 @@ namespace SoccerGame
 
         bool isKeeper;
         bool isPlayer;
+        bool shotTook = false;
 
         bool keeperJumping = false; // lets us know if goalie is jumping for key press logic
         int keeperVx = 0;
@@ -244,11 +245,22 @@ namespace SoccerGame
             }
             if (e.Key == Key.Space)
             {
-                shoot();
+                bool shotResult = shoot();
+
+                if (!shotResult)
+                {
+                    MessageBoxResult shotMessage = MessageBox.Show("Nice Try!", "Tawico Power Shot", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                    
+                    if(shotMessage == MessageBoxResult.Yes)
+                    {
+                        Window_KeyUp(sender, e);
+                    }
+
+                }
             }
         }
 
-        private void shoot()
+        private bool shoot()
         {
             Image soccerBall = SoccerBall;
             double soccerBallInitialLeftPosition = Canvas.GetLeft(soccerBall);
@@ -257,38 +269,31 @@ namespace SoccerGame
             double soccerBallFinalLeftPosition = 3.887 * horizontalArrowAngle - 101.452;
             double soccerBallFinalTopPosition = -1.666 * shotVerticalAngle + 130;
             
-
-            // Canvas.SetLeft(soccerBall, soccerBallFinalLeftPosition);
-            //Canvas.SetTop(soccerBall, soccerBallFinalTopPosition);
-
-
-            //double mousePositionX = e.GetPosition(canvas).X;
-            //double mousePositionY = e.GetPosition(canvas).Y;
-
-            
             //Defines the X-axis animation
-            DoubleAnimation animationX = new DoubleAnimation();
+            DoubleAnimation animationX = new DoubleAnimation();//define a new double animation object for the X postion of the soccer ball
             animationX.To = soccerBallFinalLeftPosition;
-            //animationX.To = mousePositionX;
+
+            //Defines the animation timeline on the soccer ball X-axis
             Storyboard.SetTarget(animationX, soccerBall);
             Storyboard.SetTargetProperty(animationX, new PropertyPath("(Canvas.Left)"));
 
             //Defines the Y-axis animation
-            DoubleAnimation animationY = new DoubleAnimation();
-            animationY.To = soccerBallFinalTopPosition;
-            //animationY.To = mousePositionY;
+            DoubleAnimation animationY = new DoubleAnimation();//define a new double animation object for the Y position of the soccer ball
+            animationY.To = soccerBallFinalTopPosition;//Set the Soccer balls final position
+
+            //Defines the animation timeline on the soccer ball X-axis
             Storyboard.SetTarget(animationY, soccerBall);
             Storyboard.SetTargetProperty(animationY, new PropertyPath("(Canvas.Top)"));
 
-            DoubleAnimation ballSizeAnimation = new DoubleAnimation();
+            DoubleAnimation ballSizeAnimation = new DoubleAnimation();//define a new double animation object for the size of the ball
+
+            //Set the scale of the animation
             ballSizeAnimation.From = 1;
             ballSizeAnimation.To = 0.5;
-            
-           
 
+            //Shrinks the ball in half over the duration of the animation
             ballScale.BeginAnimation(ScaleTransform.ScaleXProperty, ballSizeAnimation);
             ballScale.BeginAnimation(ScaleTransform.ScaleYProperty, ballSizeAnimation);
-
 
             Storyboard storyboard = new Storyboard();
 
@@ -296,62 +301,7 @@ namespace SoccerGame
             storyboard.Children.Add(animationY);
             storyboard.Begin();
 
-            
-            
-            
-
-            //animateSoccerBall (soccerBall, soccerBallInitialLeftPosition, soccerBallInitialTopPosition, soccerBallInitialWidth);
-
-            /*
-            MessageBoxResult result = MessageBox.Show("Thanks For Playing","Notice",MessageBoxButton.OK);
-            if (result == MessageBoxResult.OK)
-            {
-                soccerBall.Width = soccerBallInitialWidth;
-                Canvas.SetLeft(soccerBall, soccerBallInitialLeftPosition);
-                Canvas.SetTop(soccerBall, soccerBallInitialTopPosition);
-            }
-            */
-
-            /*
-            var seq = Enumerable.Range(0, 10);
-            foreach (int num in seq)
-            {
-                Canvas.SetLeft(soccerBall, soccerBallInitialLeftPosition - 15);
-                Canvas.SetTop(soccerBall, soccerBallInitialTopPosition - 15);
-                soccerBall.Width = soccerBallInitialWidth - 3;
-                //MessageBox.Show(num.ToString());
-            }
-            */
-        }
-
-        // Moves soccerball toward net and shrinks its size.
-        private void animateSoccerBall(Image soccerBall, double soccerBallInitialLeftPosition, double soccerBallInitialTopPosition, double soccerBallInitialWidth)
-        {
-            double soccerBallFinalLeftPosition = 3.887 * horizontalArrowAngle - 101.452;
-            double soccerBallFinalTopPosition = -1.666 * shotVerticalAngle + 130;
-
-            //Canvas.SetLeft(soccerBall, soccerBallFinalLeftPosition);
-            //Canvas.SetTop(soccerBall, soccerBallFinalTopPosition);
-            if (powerBar + powerBarVelocity <= PowerBarLimit.Width)
-            {
-                powerBar += powerBarVelocity;
-            }
-            else
-            {
-                powerBar = 0;
-            }
-            PowerBar.Width = powerBar;
-
-            /*
-            var seq = Enumerable.Range(0, 10);
-            foreach (int num in seq)
-            {
-                //Canvas.SetLeft(soccerBall, soccerBallInitialLeftPosition - 15);
-                Canvas.SetTop(soccerBall, soccerBallInitialTopPosition - 15);
-                soccerBall.Width = soccerBallInitialWidth - 3;
-                //MessageBox.Show(num.ToString());
-            }
-            */
+            return true;
         }
 
     }

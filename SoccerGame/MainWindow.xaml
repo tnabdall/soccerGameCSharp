@@ -10,13 +10,6 @@
         <Rectangle Fill="#FF7E7EF5" Height="221" Stroke="Black" Width="517"/>
         <Rectangle Fill="#FF7AFF0B" Height="98" Stroke="Black" Canvas.Top="221" Width="517"/>
         <Image x:Name="Background" Height="319" Width="517" Source="pack://application:,,,/SoccerGame;component/resources/football_goal.png" Stretch="Fill"/>
-        <Image x:Name="SoccerBall" Height="62" Canvas.Left="227" Canvas.Top="221" Width="62" Source="pack://application:,,,/SoccerGame;component/resources/soccer_ball.png">
-            <Image.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform x:Name="ballScale"/>
-                </TransformGroup>
-            </Image.RenderTransform>
-        </Image>
         <Image x:Name="Keeper" Height="80" Canvas.Left="237" Canvas.Top="88" Width="52" Source="pack://application:,,,/SoccerGame;component/resources/stickman_standing_2.png" RenderTransformOrigin="0.497,0.304"/>
         <Image x:Name="DirectionScaleImage" Height="100" Canvas.Left="417" Canvas.Top="219" Width="100" Source="pack://application:,,,/SoccerGame;component/resources/directionScaler.png"/>
         <Image x:Name ="VerticalDirectionArrow" Height="179" Canvas.Left="428" Canvas.Top="229" Width="179" Source="pack://application:,,,/SoccerGame;component/resources/arrow.png" RenderTransformOrigin="0.5,0.5">
@@ -29,7 +22,17 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name ="HorizontalDirectionArrow" Height="78" Canvas.Left="187" Canvas.Top="215" Width="72" Source="pack://application:,,,/SoccerGame;component/resources/arrow.png" RenderTransformOrigin="1,0.5" Stretch="Fill">
+        <Rectangle x:Name="PowerBarLimit" Fill="Black" Height="15" Canvas.Left="156" Stroke="Black" Canvas.Top="296" Width="200"/>
+        <Label x:Name="PowerLabel" Content="Power" Canvas.Left="88" Canvas.Top="285" FontSize="18" FontWeight="Bold"/>
+        <Rectangle x:Name="PowerBar" Fill="White" Height="15" Canvas.Left="156" Stroke="Black" Canvas.Top="296" Width="0"/>
+        <Image x:Name="SoccerBall" Height="62" Canvas.Left="227" Canvas.Top="221" Width="62" Source="pack://application:,,,/SoccerGame;component/resources/soccer_ball.png">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform x:Name="ballScale"/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image x:Name ="HorizontalDirectionArrow" Height="78" Canvas.Left="187" Canvas.Top="215" Width="72" Source="pack://application:,,,/SoccerGame;component/resources/arrow.png" RenderTransformOrigin="1,0.5" Stretch="Fill" UseLayoutRounding="False">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -39,8 +42,5 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Rectangle x:Name="PowerBarLimit" Fill="Black" Height="15" Canvas.Left="156" Stroke="Black" Canvas.Top="296" Width="200"/>
-        <Label x:Name="PowerLabel" Content="Power" Canvas.Left="88" Canvas.Top="285" FontSize="18" FontWeight="Bold"/>
-        <Rectangle x:Name="PowerBar" Fill="White" Height="15" Canvas.Left="156" Stroke="Black" Canvas.Top="296" Width="0"/>
     </Canvas>
 </Window>
